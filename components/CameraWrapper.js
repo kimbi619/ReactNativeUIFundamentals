@@ -12,10 +12,10 @@ const CameraWrapper = () => {
         const [flashMode, setFlashMode] = React.useState('on')
         const [cameraPermissions, setCameraPermissions] = useState();
         const [mediaLibraryPermissions, setMediaLibraryPermissions] = useState();
-        
+
         const [previewVisible, setPreviewVisible] = useState(false)
         const [capturedImage, setCapturedImage] = useState(null)
-        
+
         const [photo, setPhoto] = useState();
         const {width} = useWindowDimensions();
         const height = Math.round((width * 16) / 9);
@@ -70,6 +70,7 @@ const CameraWrapper = () => {
                 MediaLibrary.saveToLibraryAsync(capturedImage.uri).then(()=>{
                         setPhoto(undefined)
                 })
+                setPreviewVisible(false)
         }
         const retakePicture = () => {
                 setPreviewVisible(false)
