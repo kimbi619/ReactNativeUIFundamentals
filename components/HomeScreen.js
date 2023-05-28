@@ -1,9 +1,38 @@
-import { View, Text, Pressable, StyleSheet, Image } from "react-native";
-import React, { useCallback } from "react";
+import { View, Text, Pressable, StyleSheet, Image, Platform } from "react-native";
+import React, { useCallback, useEffect, useState } from "react";
 import { useFonts } from 'expo-font';
+import ImagePreview from "./ImagePreview";
 import { AntDesign } from '@expo/vector-icons';
-
+import * as ImagePicker from 'expo-image-picker'
+import { Constants } from "expo-constants";
+import { useNavigation } from "@react-navigation/native";
 const HomeScreen = ({ navigation }) => {
+  const [image, setImage] = useState(null);
+  useEffect( ()=>{
+    (async ()=>{
+      if(Platform.OS !== 'web'){
+        const {status} = await ImagePicker.requestMediaLibraryPermissionsAsync();
+        if(status !== 'granted'){
+          alert('Permission Denied')
+        }
+      }
+    })
+  }, []);
+
+  const clickHandler = async () => {
+
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing:true,
+      aspect:[9,16],
+      quality:1
+    });
+    if(!result.canceled){
+      setImage(result.assets[0].uri)
+      const imageUri = result.assets[0].uri
+      
+    }
+  }
   const [fontsLoaded] = useFonts({
     'Roboto-Regular': require('./assets/fonts/Roboto-Regular.ttf'),
     'Roboto-Light': require('./assets/fonts/Roboto-Light.ttf'),
@@ -17,21 +46,25 @@ const HomeScreen = ({ navigation }) => {
   if (!fontsLoaded) {
     return null;
   }
-  const clickHandler = () => {
-
-  }
+  
   return (
     <View style={styles.container}>
-      <Pressable onPress={() => {navigation.push('Camera')} } style={styles.card}>
-        <Text style={styles.title}>Scan results</Text>
-        <Text style={styles.card_description}>Name of the file</Text>
-      </Pressable>
-      <Pressable
-          activeOpacity={0.7}
-          onPress={clickHandler}
-          style={styles.touchableOpacityStyle}>
-            <AntDesign name="plus" size={24} color="#1598DB" />
-        </Pressable>
+      {image!==null ?<ImagePreview img={image}/>:
+        <>
+          <Pressable onPress={() => {navigation.push('Camera')} } style={styles.card}>
+            <Text style={styles.title}>Scan results</Text>
+            <Text style={styles.card_description}>Name of the file</Text>
+          </Pressable>
+          {/* {image && <Image source={{ uri: image }} style={styles.image} />} */}
+          <Pressable
+              activeOpacity={0.7}
+              onPress={clickHandler}
+              style={styles.touchableOpacityStyle}>
+                <AntDesign name="plus" size={24} color="#1598DB" />
+            </Pressable>
+        </>
+
+      }
     </View>
   );
 };
@@ -79,5 +112,10 @@ const styles = StyleSheet.create({
       shadowRadius: 5,
       elevation: 2,
     },
+    image:{
+      flex: 1,
+      backgroundColor: '#fff',
+      padding: 10,
+    }
 })
 export default HomeScreen;

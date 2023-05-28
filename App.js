@@ -10,7 +10,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import HomeScreen from './components/HomeScreen';
 import CameraWrapper from './components/CameraWrapper';
-
+import ImagePreview from './components/ImagePreview';
 export default function App() {
   const Stack = createStackNavigator();
 
@@ -21,6 +21,7 @@ export default function App() {
               <Stack.Navigator>
                 <Stack.Screen name="Home" component={ HomeScreen } />
                 <Stack.Screen name="Camera" component={ CameraWrapper } options={{ headerShown: false }} />
+                <Stack.Screen name="ImagePreview" component={ImagePreview} options={{headerShown: false}}/>
               </Stack.Navigator>
           </SafeAreaView>
         </NavigationContainer>
