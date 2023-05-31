@@ -1,5 +1,6 @@
 import { View, Text, StyleSheet, StatusBar, ImageBackground, useWindowDimensions, Pressable } from "react-native";
 import React from "react";
+import { Ionicons } from "@expo/vector-icons";
 
 
 
@@ -10,8 +11,11 @@ const CameraPreview = ({ photo, retakePicture, savePhoto }) => {
         const {width} = useWindowDimensions();
         const height = Math.round((width * 16) / 9);
 
-        const openCamera = () => {
-
+ 
+        const sendImage = () => {
+                /*
+                * SEND IMAGE TO SERVER
+                */
         }
   return (
     <View style={ styles.container} >
@@ -24,14 +28,14 @@ const CameraPreview = ({ photo, retakePicture, savePhoto }) => {
                 }}
         />
         <View style={styles.photoOptions}>
-                <Pressable style={styles.photoOption} onPress={openCamera}>
-                        <Text style={styles.photoOptionText}>Camera</Text>
-                </Pressable>
                 <Pressable style={styles.photoOption} onPress={ retakePicture }>
                         <Text style={styles.photoOptionText}>Re-Take</Text>
                 </Pressable>
                 <Pressable style={styles.photoOption} onPress={ savePhoto }>
                         <Text style={styles.photoOptionText}>Save</Text>
+                </Pressable>
+                <Pressable style={styles.sendButton} onPress={ sendImage }>
+                        <Text style={styles.sendText}>Send</Text><Ionicons name="ios-send-outline" size={20} color="#fff" />
                 </Pressable>
         </View>
     </View>
@@ -61,7 +65,23 @@ const styles = StyleSheet.create({
         photoOptionText: {
                 // color: '#fff',
                 fontSize: 17,
-        }
+        },
+        sendButton: {
+                width: 110,
+                height: 35,
+                borderRadius: 50,
+                alignItems: 'center',
+                alignSelf: 'center',
+                justifyContent: 'center',
+                backgroundColor: '#17B169',
+                flexDirection: 'row',
+        },
+      sendText: {
+                color: '#fff',
+                fontSize: 17,
+                fontWeight: 400,
+                marginRight: 10,
+      }
 
 })
 

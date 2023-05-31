@@ -6,6 +6,7 @@ import { AntDesign } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker'
 import { Constants } from "expo-constants";
 import { useNavigation } from "@react-navigation/native";
+
 const HomeScreen = ({ navigation }) => {
   const [image, setImage] = useState(null);
   useEffect( ()=>{
@@ -24,14 +25,15 @@ const HomeScreen = ({ navigation }) => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing:true,
-      aspect:[9,16],
       quality:1
     });
     if(!result.canceled){
       setImage(result.assets[0].uri)
-      const imageUri = result.assets[0].uri
-      
+      const imageUri = result.assets[0].uri 
     }
+    result.assets && navigation.navigate('ImportImagePreview', {
+      imageFile: result.assets[0]
+    })
   }
   const [fontsLoaded] = useFonts({
     'Roboto-Regular': require('./assets/fonts/Roboto-Regular.ttf'),
@@ -49,8 +51,6 @@ const HomeScreen = ({ navigation }) => {
   
   return (
     <View style={styles.container}>
-      {image!==null ?<ImagePreview img={image}/>:
-        <>
           <Pressable onPress={() => {navigation.push('Camera')} } style={styles.card}>
             <Text style={styles.title}>Scan results</Text>
             <Text style={styles.card_description}>Name of the file</Text>
@@ -59,12 +59,9 @@ const HomeScreen = ({ navigation }) => {
           <Pressable
               activeOpacity={0.7}
               onPress={clickHandler}
-              style={styles.touchableOpacityStyle}>
+              style={styles.floatingButton}>
                 <AntDesign name="plus" size={24} color="#1598DB" />
-            </Pressable>
-        </>
-
-      }
+          </Pressable>
     </View>
   );
 };
@@ -92,7 +89,7 @@ const styles = StyleSheet.create({
       color: '#fff',
       fontFamily: 'Roboto-Light',
     },
-    touchableOpacityStyle: {
+    floatingButton: {
       position: 'absolute',
       width: 70,
       height: 70,
