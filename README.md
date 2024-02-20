@@ -8,6 +8,11 @@ The code on the repository is original, created and maintained by ##Rising Tide 
 - [Twitter](https://twitter.com/kdaprov)
 - [LinkedIn](https://linkedin.com/in/kimbi-darlington-a867691b1)
 
+## PROJECTS
+[Gallery App](https://github.com/kimbi619/ReactNativeUIFundamentals)
+
+
+
 ## Prerequisites
 Before you begin, ensure that you have the following prerequisites installed on your machine:
 
