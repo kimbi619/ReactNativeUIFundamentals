@@ -9,7 +9,9 @@ The code on the repository is original, created and maintained by ##Rising Tide 
 - [LinkedIn](https://linkedin.com/in/kimbi-darlington-a867691b1)
 
 ## PROJECTS
-[Gallery App](https://github.com/kimbi619/ReactNativeUIFundamentals)
+- [Gallery App](https://github.com/kimbi619/ReactNativeUIFundamentals/tree/GalleryApp)
+- [Bottom Stack Navigator](https://github.com/kimbi619/ReactNativeUIFundamentals/tree/bottomStackNavigator)
+- [Browser](https://github.com/kimbi619/ReactNativeUIFundamentals/tree/browser)
 
 
 
