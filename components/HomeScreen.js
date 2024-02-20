@@ -20,8 +20,8 @@ const HomeScreen = ({ navigation }) => {
     })
   }, []);
 
-  const clickHandler = async () => {
 
+  const clickHandler = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing:true,
@@ -30,31 +30,20 @@ const HomeScreen = ({ navigation }) => {
     if(!result.canceled){
       setImage(result.assets[0].uri)
       const imageUri = result.assets[0].uri 
+      console.log(imageUri);
+      result.assets && navigation.navigate('ImportImagePreview', {
+        imageFile: result.assets[0]
+      })
     }
-    result.assets && navigation.navigate('ImportImagePreview', {
-      imageFile: result.assets[0]
-    })
   }
-  const [fontsLoaded] = useFonts({
-    'Roboto-Regular': require('./assets/fonts/Roboto-Regular.ttf'),
-    'Roboto-Light': require('./assets/fonts/Roboto-Light.ttf'),
-  });
-  const onLayoutRootView = useCallback(async () => {
-    if (fontsLoaded) {
-      await SplashScreen.hideAsync();
-    }
-  }, [fontsLoaded]);
 
-  if (!fontsLoaded) {
-    return null;
-  }
-  
+
+
   return (
     <View style={styles.container}>
-          <Pressable onPress={() => {navigation.push('Camera')} } style={styles.card}>
-            <Text style={styles.title}>Scan results</Text>
-            <Text style={styles.card_description}>Name of the file</Text>
-          </Pressable>
+          {/* <Pressable onPress={() => {navigation.push('Camera')} } style={styles.card}>
+            <Text style={styles.title}>Open Camera</Text>
+          </Pressable> */}
           {/* {image && <Image source={{ uri: image }} style={styles.image} />} */}
           <Pressable
               activeOpacity={0.7}
@@ -83,11 +72,9 @@ const styles = StyleSheet.create({
     title: {
       color: '#fff',
       textTransform: 'uppercase',
-      fontFamily: 'Roboto-Regular',
     }, 
     card_description: {
       color: '#fff',
-      fontFamily: 'Roboto-Light',
     },
     floatingButton: {
       position: 'absolute',

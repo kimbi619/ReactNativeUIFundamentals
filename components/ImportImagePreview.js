@@ -1,6 +1,7 @@
-import { StyleSheet, Text, View, StatusBar, ImageBackground, Pressable } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View, StatusBar, ImageBackground, Pressable } from 'react-native'
 import React from 'react'
 import { AntDesign, Ionicons } from '@expo/vector-icons';
+
 
 const ImportImagePreview = ({ route, navigation }) => {
     const { imageFile } = route.params;
@@ -18,12 +19,12 @@ const ImportImagePreview = ({ route, navigation }) => {
   return (
     <View style={styles.container}>
         <StatusBar hidden />
-        <Pressable
+        <TouchableOpacity
               activeOpacity={0.7}
               onPress={ closePreview }
               style={styles.floatingButton}>
                 <AntDesign name="close" size={22} color="#fff" />
-          </Pressable>
+        </TouchableOpacity>
         <View style={styles.imageWrapper}>
             <ImageBackground
                 source={{uri: imageFile?.uri }}
@@ -33,12 +34,12 @@ const ImportImagePreview = ({ route, navigation }) => {
                 }}
             />
         </View>
-        <Pressable
+        <TouchableOpacity
               activeOpacity={0.7}
               onPress={ sendImage }
               style={styles.sendButton}>
-                <Text style={styles.sendText}>Send</Text><Ionicons name="ios-send-outline" size={20} color="#fff" />
-          </Pressable>
+                <Text style={styles.sendText}>Send</Text><Ionicons name="send-sharp" size={20} color="#fff" />
+          </TouchableOpacity>
     </View>
   )
 }
@@ -81,7 +82,7 @@ const styles = StyleSheet.create({
       sendText: {
         color: '#fff',
         fontSize: 20,
-        fontWeight: 400,
+        fontWeight: '400',
         marginRight: 10,
       }
 })

@@ -11,15 +11,16 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "plugins":[
+    "plugins": [
       [
         "expo-media-library",
         {
-          "photosPermission":"Allow $(PRODUCT_NAME) to access your photos.",
-          "savePhotosPermission":"Allow $(PRODUCT_NAME) to save photos.",
-          "isAccessMediaLocationEnabled":"true"
+          "photosPermission": "Allow $(PRODUCT_NAME) to access your photos.",
+          "savePhotosPermission": "Allow $(PRODUCT_NAME) to save photos.",
+          "isAccessMediaLocationEnabled": "true"
         }
-      ]
+      ],
+      "expo-font"
     ],
     "assetBundlePatterns": [
       "**/*"
